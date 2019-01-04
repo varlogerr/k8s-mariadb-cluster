@@ -2,6 +2,12 @@
 set -eo pipefail
 shopt -s nullglob
 
+MARIADB_CONF="${MARIADB_CONF:-"/etc/mysql/conf.d/mariadb.cnf"}"
+
+if ! [ -f "${MARIADB_CONF}" ]; then 
+    cp /opt/galera/mariadb.cnf "${MARIADB_CONF}"
+fi
+
 if [ "$TRACE" = "1" ]; then
 	set -x
 fi
